@@ -1,0 +1,37 @@
+{
+  "name": "OpportunityAI",
+  "version": "1.0.0",
+  "description": "AI-powered military career guidance platform",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo 'OpportunityAI Development Environment'",
+    "install:all": "npm run install:backend && npm run install:mobile && npm run install:ai",
+    "install:backend": "cd backend && npm install",
+    "install:mobile": "cd mobile && npm install",
+    "install:ai": "cd ai-engine && pip install -r requirements.txt",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:ai": "cd ai-engine && uvicorn main:app --host 0.0.0.0 --port 8000 --reload",
+    "dev:mobile": "cd mobile && npm run start",
+    "build:backend": "cd backend && npm run build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:build": "docker-compose build",
+    "db:setup": "psql -U postgres -d opportunity_ai -f database/schema.sql",
+    "test": "echo 'Run tests for individual components' && exit 0"
+  },
+  "keywords": [
+    "military",
+    "career",
+    "ai",
+    "react-native",
+    "node",
+    "fastapi"
+  ],
+  "author": "OpportunityAI Team",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "dotenv": "^17.2.0",
+    "pg": "^8.16.3"
+  }
+}

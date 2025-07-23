@@ -1,0 +1,77 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15
+    container_name: opportunity-ai-db
+    environment:
+      POSTGRES_DB: opportunity_ai
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - opportunity-ai-network
+
+  # Redis Cache (optional)
+  redis:
+    image: redis:7-alpine
+    container_name: opportunity-ai-redis
+    ports:
+      - "6379:6379"
+    networks:
+      - opportunity-ai-network
+
+  # Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: opportunity-ai-backend
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - DATABASE_URL=postgresql://postgres:postgres123@postgres:5432/opportunity_ai
+      - AI_ENGINE_URL=http://ai-engine:8000
+      - JWT_SECRET=dev-jwt-secret-change-in-production
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+      - ai-engine
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - opportunity-ai-network
+    restart: unless-stopped
+
+  # AI Engine
+  ai-engine:
+    build:
+      context: ./ai-engine
+      dockerfile: Dockerfile
+    container_name: opportunity-ai-engine
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - DATABASE_URL=postgresql://postgres:postgres123@postgres:5432/opportunity_ai
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    volumes:
+      - ./ai-engine:/app
+    networks:
+      - opportunity-ai-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  opportunity-ai-network:
+    driver: bridge

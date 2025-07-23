@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx react-native init:*)",
+      "Bash(npx @react-native-community/cli init:*)",
+      "Bash(mkdir:*)",
+      "Bash(docker:*)",
+      "Bash(npm install:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm start)",
+      "Bash(curl:*)",
+      "Bash(pip install:*)",
+      "Bash(python:*)",
+      "Bash(taskkill:*)",
+      "Bash(cp:*)",
+      "Bash(psql:*)",
+      "Bash(node:*)",
+      "Bash(start C:UsersVictorAdamsWebstormProjectsOpportunityAIweb-appindex.html)",
+      "Bash(explorer:*)"
+    ],
+    "deny": []
+  }
+}
