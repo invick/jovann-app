@@ -52,10 +52,10 @@ This app helps people:
 
 ## 👥 Team
 
-- Product Vision: [Your Name]
-- Technical Lead: [To be assigned]
-- Designer: [To be assigned]
-- Advisors: DoD / Veteran Services / Recruiters
+- **Developer**: Victor Adams
+- **Product Vision**: Jovann Adams
+- **Technical Lead**: Victor Adams
+- **Advisors**: DoD / Veteran Services / Recruiters
 
 ## 📄 License
 
@@ -63,4 +63,5 @@ MIT License
 
 ## 📬 Contact
 
-For questions or demos: [Insert Your Contact Info]
+**Developer**: Victor Adams  
+For questions or demos, please reach out via GitHub issues or repository discussions.
